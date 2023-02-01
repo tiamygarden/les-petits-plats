@@ -8,4 +8,4 @@ recipes.forEach((recipe) => {
     recipesSection.appendChild(createRecipeDOM(recipe));
 });
 
-new MainSearch(recipes, recipesSection).init()
+new MainSearch(recipes, recipesSection)

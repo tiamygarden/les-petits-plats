@@ -1,4 +1,5 @@
-import { createRecipeDOM } from '../pages/createRecipeDOM.js';
+import {createRecipeDOM} from '../pages/createRecipeDOM.js';
+import listRender from "../utils/listRender.js";
 
 export default class MainSearch {
     _recipes;
@@ -7,6 +8,17 @@ export default class MainSearch {
     constructor(recipes, recipesSection) {
         this._recipes = recipes;
         this._recipesSection = recipesSection;
+
+        const searchInput = document.getElementById('recipeFinderInput');
+        searchInput.onkeyup = (event) => {
+            if (event.target.value.length > 2) {
+                this.search(event.target.value)
+            } else {
+                this.search('')
+            }
+        }
+
+        listRender(recipes)
     }
 
     search(query) {
@@ -21,16 +33,6 @@ export default class MainSearch {
         this._recipesSection.innerHTML = '';
 
         recipes.forEach(recipe => this._recipesSection.appendChild(createRecipeDOM(recipe)));
-    }
-
-    init() {
-        const searchInput = document.getElementById('recipeFinderInput');
-        searchInput.onkeyup = (event) => {
-            console.log(event)
-            if(event.target.value.length>2){
-                this.search(event.target.value)
-            }
-
-        };
+        listRender(recipes)
     }
 }
