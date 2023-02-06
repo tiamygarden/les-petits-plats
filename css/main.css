@@ -10,3 +10,15 @@
 .card__title {
     font-size: 18px
 }
+
+.show {
+    display: block;
+}
+
+/*#ingredientsOptions, #appliancesOptions, #ustensilsOptions {*/
+/*    display: none;*/
+/*}*/
+
+/*#ingredientsOptions.active , #appliancesOptions.active , #ustensilsOptions.active {*/
+/*    display: block;*/
+/*}*/
