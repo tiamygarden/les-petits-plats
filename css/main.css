@@ -15,10 +15,7 @@
     display: block;
 }
 
-/*#ingredientsOptions, #appliancesOptions, #ustensilsOptions {*/
-/*    display: none;*/
-/*}*/
-
-/*#ingredientsOptions.active , #appliancesOptions.active , #ustensilsOptions.active {*/
-/*    display: block;*/
-/*}*/
+#sorter input::placeholder{
+ color: white !important;
+ opacity: 0.5;
+ }
