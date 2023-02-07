@@ -8,4 +8,4 @@ recipes.forEach((recipe) => {
     recipesSection.appendChild(createRecipeDOM(recipe));
 });
 
-new MainSearch(recipes, recipesSection)
+window.MainSearch = new MainSearch(recipes, recipesSection)

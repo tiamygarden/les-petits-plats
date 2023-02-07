@@ -14,8 +14,10 @@ function createIngredients(recipes) {
 
     let html = ''
     map.forEach((value, ingredient) => html += `<li class="col-4">
-                                                <button class="border-0 bg-primary text-white m-2 p-1 text-start w-100">${ingredient}
-                                                </button>
+                                                    <button onclick="window.MainSearch.addTagFilter('${ingredient}', 'ingredient')" 
+                                                            class="border-0 bg-primary text-white m-2 p-1 text-start w-100">
+                                                        ${ingredient}
+                                                    </button>
                                                 </li>`)
 
     wrapper.innerHTML = html
@@ -53,8 +55,10 @@ function createAppliances(recipes) {
 
     let html = ''
     map.forEach((value, appliance) => html += `<li class="col-4">
-                                                <button class="border-0 bg-success text-white m-2 p-1 text-start w-100">${appliance}
-                                                </button>
+                                                    <button onclick="window.MainSearch.addTagFilter('${appliance}', 'appliance')" 
+                                                            class="border-0 bg-success text-white m-2 p-1 text-start w-100">
+                                                        ${appliance}
+                                                    </button>
                                                 </li>`)
     wrapper.innerHTML = html
 
@@ -91,9 +95,11 @@ function createUstensils(recipes) {
 
     let html = ''
     map.forEach((value, ustensil) => html += `<li class="col-4">
-                                                <button class="border-0 bg-danger text-white m-2 p-1 text-start w-100">${ustensil}
-                                                </button>
-                                                </li>`)
+                                                 <button onclick="window.MainSearch.addTagFilter('${ustensil}', 'ustensil')"
+                                                         class="border-0 bg-danger text-white m-2 p-1 text-start w-100">
+                                                    ${ustensil}
+                                                 </button>
+                                              </li>`)
     wrapper.innerHTML = html
 
     const buttonToDisplayList = document.getElementById('ustensilsButton')
