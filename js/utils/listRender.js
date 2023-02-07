@@ -10,7 +10,7 @@ function createIngredients(recipes) {
     const wrapper = document.getElementById('ingredientsOptions')
 
     const map = new Map
-    recipes.forEach(recipe => recipe.ingredients.forEach(i => map.set(i.ingredient, '')))
+    recipes.forEach(recipe => recipe.ingredients.forEach(i => map.set(i.ingredient.toLowerCase(), '')))
 
     let html = ''
     map.forEach((value, ingredient) => html += `<li class="col-4">
@@ -51,7 +51,7 @@ function createAppliances(recipes) {
     const wrapper = document.getElementById('appliancesOptions')
 
     const map = new Map
-    recipes.forEach(recipe => map.set(recipe.appliance, ''))
+    recipes.forEach(recipe => map.set(recipe.appliance.toLowerCase(), ''))
 
     let html = ''
     map.forEach((value, appliance) => html += `<li class="col-4">
@@ -91,7 +91,7 @@ function createUstensils(recipes) {
     const wrapper = document.getElementById('ustensilsOptions')
 
     const map = new Map
-    recipes.forEach(recipe => recipe.ustensils.forEach(ustensil => map.set(ustensil, '')))
+    recipes.forEach(recipe => recipe.ustensils.forEach(ustensil => map.set(ustensil.toLowerCase(), '')))
 
     let html = ''
     map.forEach((value, ustensil) => html += `<li class="col-4">

@@ -1,5 +1,6 @@
 import {createRecipeDOM} from '../pages/createRecipeDOM.js';
 import listRender from "../utils/listRender.js";
+import tagsRender from "../utils/tagsRender.js";
 
 export default class MainSearch {
     _recipes;
@@ -20,6 +21,7 @@ export default class MainSearch {
             }
         }
 
+        tagsRender(this._filterBytags)
         listRender(recipes)
     }
 
@@ -38,7 +40,6 @@ export default class MainSearch {
             if (exist) {
                 let res = true
                 this._filterBytags.forEach(tag => {
-                    console.log(tag.name)
                     if (
                         tag.category === 'ingredient'
                         && !recipe.ingredients.find(ingredient => ingredient.ingredient === tag.name)
@@ -47,7 +48,7 @@ export default class MainSearch {
                     }
                     if (
                         tag.category === 'appliance'
-                        && recipe.appliance!==tag.name
+                        && recipe.appliance !== tag.name
                     ) {
                         res = false
                     }
@@ -72,7 +73,17 @@ export default class MainSearch {
     }
 
     addTagFilter(name, category) {
+        if (this._filterBytags.find(tag => tag.name === name)) return;
+
         this._filterBytags.push({name, category})
+
         this.search(this._searchInput.value)
+        tagsRender(this._filterBytags)
+    }
+
+    removeTagFilter(tagName) {
+        this._filterBytags = this._filterBytags.filter(tag => tag.name !== tagName)
+        this.search(this._searchInput.value)
+        tagsRender(this._filterBytags)
     }
 }
