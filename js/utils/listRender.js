@@ -91,7 +91,7 @@ function createUstensils(recipes) {
     const wrapper = document.getElementById('ustensilsOptions')
 
     const map = new Map
-    recipes.forEach(recipe => recipe.ustensils.forEach(ustensil => map.set(ustensil.toLowerCase(), '')))
+    recipes.forEach(recipe => recipe.ustensils.forEach(u => map.set(u.toLowerCase(), '')))
 
     let html = ''
     map.forEach((value, ustensil) => html += `<li class="col-4">

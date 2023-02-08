@@ -42,19 +42,20 @@ export default class MainSearch {
                 this._filterBytags.forEach(tag => {
                     if (
                         tag.category === 'ingredient'
-                        && !recipe.ingredients.find(ingredient => ingredient.ingredient === tag.name)
+                        && !recipe.ingredients.find(ingredient => ingredient.ingredient.toLowerCase() === tag.name)
                     ) {
                         res = false
                     }
                     if (
                         tag.category === 'appliance'
-                        && recipe.appliance !== tag.name
+                        && recipe.appliance.toLowerCase() !== tag.name
                     ) {
                         res = false
                     }
                     if (
                         tag.category === 'ustensil'
-                        && !recipe.ustensils.includes(tag.name)
+                        && !recipe.ustensils.find(ustensil => ustensil.toLowerCase() === tag.name)
+                        // && !recipe.ustensils.includes(tag.name)
                     ) {
                         res = false
                     }
