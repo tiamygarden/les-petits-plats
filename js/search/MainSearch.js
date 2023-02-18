@@ -87,4 +87,6 @@ export default class MainSearch {
         this.search(this._searchInput.value)
         tagsRender(this._filterBytags)
     }
+
+
 }

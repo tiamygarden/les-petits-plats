@@ -36,6 +36,23 @@ function createIngredients(recipes) {
         // affiche la liste
         event.target.parentNode.getElementsByTagName('ul')[0].classList.remove('d-none')
 
+        // recherche dans la liste l'ingrédient saisi dans l'input
+        input.onkeyup = (event) => {
+            const list = event.target.parentNode.getElementsByTagName('ul')[0]
+            const li = list.getElementsByTagName('li')
+            const filter = event.target.value.toUpperCase()
+
+            for (let i = 0; i < li.length; i++) {
+                const button = li[i].getElementsByTagName('button')[0]
+                const txtValue = button.textContent || button.innerText
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = ''
+                } else {
+                    li[i].style.display = 'none'
+                }
+            }
+        }
+
         onClickOut(
             document.getElementById('ingredientsButton').parentNode,
             () => {
@@ -76,6 +93,23 @@ function createAppliances(recipes) {
         // affiche la liste
         event.target.parentNode.getElementsByTagName('ul')[0].classList.remove('d-none')
 
+        // recherche dans la liste l'appareil saisi dans l'input
+        input.onkeyup = (event) => {
+            const list = event.target.parentNode.getElementsByTagName('ul')[0]
+            const li = list.getElementsByTagName('li')
+            const filter = event.target.value.toUpperCase()
+
+            for (let i = 0; i < li.length; i++) {
+                const button = li[i].getElementsByTagName('button')[0]
+                const txtValue = button.textContent || button.innerText
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = ''
+                } else {
+                    li[i].style.display = 'none'
+                }
+            }
+        }
+
         onClickOut(
             document.getElementById('appliancesButton').parentNode,
             () => {
@@ -115,6 +149,23 @@ function createUstensils(recipes) {
 
         // affiche la liste
         event.target.parentNode.getElementsByTagName('ul')[0].classList.remove('d-none')
+
+        // recherche dans la liste l'ustensile saisi dans l'input
+        input.onkeyup = (event) => {
+            const list = event.target.parentNode.getElementsByTagName('ul')[0]
+            const li = list.getElementsByTagName('li')
+            const filter = event.target.value.toUpperCase()
+
+            for (let i = 0; i < li.length; i++) {
+                const button = li[i].getElementsByTagName('button')[0]
+                const txtValue = button.textContent || button.innerText
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = ''
+                } else {
+                    li[i].style.display = 'none'
+                }
+            }
+        }
 
         onClickOut(
             document.getElementById('ustensilsButton').parentNode,
