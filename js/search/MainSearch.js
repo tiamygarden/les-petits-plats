@@ -67,6 +67,11 @@ export default class MainSearch {
             return false
         });
 
+        //si la recherche ne donne aucun résultat, on affiche un message sinon on affiche les recettes
+        if (recipes.length === 0) {
+            this._recipesSection.innerHTML = `<p class="text-center">Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
+            return;
+        }
         this._recipesSection.innerHTML = '';
 
         recipes.forEach(recipe => this._recipesSection.appendChild(createRecipeDOM(recipe)));
@@ -87,6 +92,4 @@ export default class MainSearch {
         this.search(this._searchInput.value)
         tagsRender(this._filterBytags)
     }
-
-
 }
