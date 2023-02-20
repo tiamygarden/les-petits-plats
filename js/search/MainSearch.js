@@ -31,7 +31,7 @@ export default class MainSearch {
     }
 
     search(query) {
-        const filteredRecipes = this._recipes.map(recipe => {
+        const filteredRecipes = this._recipes.filter(recipe => {
             const exist = recipe.name.toLowerCase().includes(query.toLowerCase())
                 || recipe.description.toLowerCase().includes(query.toLowerCase())
                 || recipe.ingredients.find(
@@ -50,7 +50,7 @@ export default class MainSearch {
         });
 
         //si la recherche ne retourne aucun résultat, on affiche un message
-        if (filteredRecipes.filter(recipe => recipe).length === 0) {
+        if (filteredRecipes.length === 0) {
             this._recipesSection.innerHTML = `<div class="col-12 text-center">
                                                 <p class="text-secondary">
                                                     Aucune recette ne correspond à votre critère… vous pouvez
@@ -62,13 +62,11 @@ export default class MainSearch {
         //sinon on affiche les recettes
         else {
             this._recipesSection.innerHTML = '';
-            filteredRecipes
-                .filter(recipe => recipe)
-                .forEach(recipe => {
+            filteredRecipes.forEach(recipe => {
                     this._recipesSection.appendChild(createRecipeDOM(recipe))
                 })
         }
-        listRender(filteredRecipes.filter(recipe => recipe))
+        listRender(filteredRecipes)
     }
 
     isFilteredByTag(recipe) {
