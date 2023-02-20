@@ -69,10 +69,10 @@ export default class MainSearch {
         //si la recherche ne retourne aucun résultat, on affiche un message
         if (filteredRecipes.filter(recipe => recipe).length === 0) {
             this._recipesSection.innerHTML = `<div class="col-12 text-center">
-                                                <h2 class="text-secondary">
+                                                <p class="text-secondary">
                                                     Aucune recette ne correspond à votre critère… vous pouvez
                                                     chercher « tarte aux pommes », « poisson », etc.
-                                                </h2>
+                                                </p>
                                               </div>`
         }
 
