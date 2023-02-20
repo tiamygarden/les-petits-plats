@@ -26,7 +26,7 @@ export default class MainSearch {
     }
 
     search(query) {
-        const recipes = this._recipes.filter(recipe => {
+        const filteredRecipes = this._recipes.map(recipe => {
             const exist = recipe.name.toLowerCase().includes(query.toLowerCase())
                 || recipe.description.toLowerCase().includes(query.toLowerCase())
                 || recipe.ingredients.find(
@@ -34,49 +34,60 @@ export default class MainSearch {
                 );
 
             if (exist && this._filterBytags === []) {
-                return true
+                return recipe;
             }
 
-            if (exist) {
-                let res = true
-                this._filterBytags.forEach(tag => {
-                    if (
-                        tag.category === 'ingredient'
-                        && !recipe.ingredients.find(ingredient => ingredient.ingredient.toLowerCase() === tag.name)
-                    ) {
-                        res = false
-                    }
-                    if (
-                        tag.category === 'appliance'
-                        && recipe.appliance.toLowerCase() !== tag.name
-                    ) {
-                        res = false
-                    }
-                    if (
-                        tag.category === 'ustensil'
-                        && !recipe.ustensils.find(ustensil => ustensil.toLowerCase() === tag.name)
-                        // && !recipe.ustensils.includes(tag.name)
-                    ) {
-                        res = false
-                    }
-                })
+            let res = true;
+            this._filterBytags.forEach(tag => {
+                if (
+                    tag.category === 'ingredient'
+                    && !recipe.ingredients.find(ingredient => ingredient.ingredient.toLowerCase() === tag.name)
+                ) {
+                    res = false;
+                }
+                if (
+                    tag.category === 'appliance'
+                    && recipe.appliance.toLowerCase() !== tag.name
+                ) {
+                    res = false;
+                }
+                if (
+                    tag.category === 'ustensil'
+                    && !recipe.ustensils.find(ustensil => ustensil.toLowerCase() === tag.name)
+                ) {
+                    res = false;
+                }
+            });
 
-                return res
+            if (exist && res) {
+                return recipe;
             }
 
-            return false
+            return false;
         });
 
-        //si la recherche ne donne aucun résultat, on affiche un message sinon on affiche les recettes
-        if (recipes.length === 0) {
-            this._recipesSection.innerHTML = `<p class="text-center">Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>`;
-            return;
+        //si la recherche ne retourne aucun résultat, on affiche un message
+        if (filteredRecipes.filter(recipe => recipe).length === 0) {
+            this._recipesSection.innerHTML = `<div class="col-12 text-center">
+                                                <h2 class="text-secondary">
+                                                    Aucune recette ne correspond à votre critère… vous pouvez
+                                                    chercher « tarte aux pommes », « poisson », etc.
+                                                </h2>
+                                              </div>`
         }
-        this._recipesSection.innerHTML = '';
 
-        recipes.forEach(recipe => this._recipesSection.appendChild(createRecipeDOM(recipe)));
-        listRender(recipes)
+        //sinon on affiche les recettes
+        else {
+            this._recipesSection.innerHTML = '';
+            filteredRecipes
+                .filter(recipe => recipe)
+                .forEach(recipe => {
+                    this._recipesSection.appendChild(createRecipeDOM(recipe))
+                })
+        }
+
     }
+
 
     addTagFilter(name, category) {
         if (this._filterBytags.find(tag => tag.name === name)) return;
@@ -92,4 +103,6 @@ export default class MainSearch {
         this.search(this._searchInput.value)
         tagsRender(this._filterBytags)
     }
+
+
 }
