@@ -1,7 +1,7 @@
 import {createRecipeDOM} from '../pages/createRecipeDOM.js';
 import listRender from "../utils/listRender.js";
 import tagsRender from "../utils/tagsRender.js";
-import Bench from "../utils/bench.js";
+// import Bench from "../utils/bench.js";
 
 export default class MainSearch {
     _recipes;
@@ -15,15 +15,15 @@ export default class MainSearch {
 
         this._searchInput = document.getElementById('recipeFinderInput');
         this._searchInput.onkeyup = (event) => {
-            const bench = Bench()
-            for (let i = 0; i < 100; i++) {
+            // const bench = Bench()
+            // for (let i = 0; i < 100; i++) {
                 if (event.target.value.length > 2) {
                     this.search(event.target.value)
                 } else {
                     this.search('')
                 }
-            }
-            bench.stop()
+            // }
+            // bench.stop()
         }
 
         tagsRender(this._filterBytags)
