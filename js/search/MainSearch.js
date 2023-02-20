@@ -90,6 +90,7 @@ export default class MainSearch {
                     this._recipesSection.appendChild(createRecipeDOM(recipe))
                 })
         }
+        listRender(filteredRecipes.filter(recipe => recipe))
     }
 
 
