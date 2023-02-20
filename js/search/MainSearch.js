@@ -1,6 +1,7 @@
 import {createRecipeDOM} from '../pages/createRecipeDOM.js';
 import listRender from "../utils/listRender.js";
 import tagsRender from "../utils/tagsRender.js";
+import Bench from "../utils/bench.js";
 
 export default class MainSearch {
     _recipes;
@@ -26,6 +27,7 @@ export default class MainSearch {
     }
 
     search(query) {
+        const bench = Bench()
         const filteredRecipes = this._recipes.map(recipe => {
             const exist = recipe.name.toLowerCase().includes(query.toLowerCase())
                 || recipe.description.toLowerCase().includes(query.toLowerCase())
@@ -85,7 +87,7 @@ export default class MainSearch {
                     this._recipesSection.appendChild(createRecipeDOM(recipe))
                 })
         }
-
+        bench.stop()
     }
 
 
