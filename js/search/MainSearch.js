@@ -58,7 +58,7 @@ export default class MainSearch {
                 }
                 if (
                     tag.category === 'ustensil'
-                    && !recipe.ustensils.find(ustensil => ustensil.toLowerCase() === tag.name)
+                    && !recipe.ustensils.includes(tag.name)
                 ) {
                     res = false;
                 }
