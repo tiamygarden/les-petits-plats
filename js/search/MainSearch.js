@@ -15,11 +15,15 @@ export default class MainSearch {
 
         this._searchInput = document.getElementById('recipeFinderInput');
         this._searchInput.onkeyup = (event) => {
-            if (event.target.value.length > 2) {
-                this.search(event.target.value)
-            } else {
-                this.search('')
+            const bench = Bench()
+            for (let i = 0; i < 100; i++) {
+                if (event.target.value.length > 2) {
+                    this.search(event.target.value)
+                } else {
+                    this.search('')
+                }
             }
+            bench.stop()
         }
 
         tagsRender(this._filterBytags)
@@ -27,7 +31,6 @@ export default class MainSearch {
     }
 
     search(query) {
-        const bench = Bench()
         const filteredRecipes = this._recipes.map(recipe => {
             const exist = recipe.name.toLowerCase().includes(query.toLowerCase())
                 || recipe.description.toLowerCase().includes(query.toLowerCase())
@@ -87,7 +90,6 @@ export default class MainSearch {
                     this._recipesSection.appendChild(createRecipeDOM(recipe))
                 })
         }
-        bench.stop()
     }
 
 
