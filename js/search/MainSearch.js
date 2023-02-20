@@ -42,29 +42,7 @@ export default class MainSearch {
                 return recipe;
             }
 
-            let res = true;
-            this._filterBytags.forEach(tag => {
-                if (
-                    tag.category === 'ingredient'
-                    && !recipe.ingredients.find(ingredient => ingredient.ingredient.toLowerCase() === tag.name)
-                ) {
-                    res = false;
-                }
-                if (
-                    tag.category === 'appliance'
-                    && recipe.appliance.toLowerCase() !== tag.name
-                ) {
-                    res = false;
-                }
-                if (
-                    tag.category === 'ustensil'
-                    && !recipe.ustensils.includes(tag.name)
-                ) {
-                    res = false;
-                }
-            });
-
-            if (exist && res) {
+            if (exist && this.isFilteredByTag(recipe)) {
                 return recipe;
             }
 
@@ -93,6 +71,32 @@ export default class MainSearch {
         listRender(filteredRecipes.filter(recipe => recipe))
     }
 
+    isFilteredByTag(recipe) {
+        let res = true;
+
+        this._filterBytags.forEach(tag => {
+            if (
+                tag.category === 'ingredient'
+                && !recipe.ingredients.find(ingredient => ingredient.ingredient.toLowerCase() === tag.name)
+            ) {
+                res = false;
+            }
+            if (
+                tag.category === 'appliance'
+                && recipe.appliance.toLowerCase() !== tag.name
+            ) {
+                res = false;
+            }
+            if (
+                tag.category === 'ustensil'
+                && !recipe.ustensils.includes(tag.name)
+            ) {
+                res = false;
+            }
+        });
+
+        return res
+    }
 
     addTagFilter(name, category) {
         if (this._filterBytags.find(tag => tag.name === name)) return;
