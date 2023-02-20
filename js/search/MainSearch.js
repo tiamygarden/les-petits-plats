@@ -33,12 +33,12 @@ export default class MainSearch {
     search(query) {
         const filteredRecipes = []
 
-        this._recipes.forEach(recipe => {
+        for (const [i, recipe] of this._recipes.entries()) {
             const exist = recipe.name.toLowerCase().includes(query.toLowerCase())
                 || recipe.description.toLowerCase().includes(query.toLowerCase())
                 || recipe.ingredients.find(
                     ingredient => ingredient.ingredient.toLowerCase().includes(query.toLowerCase()),
-                );
+                )
 
             if (exist && this._filterBytags === []) {
                 filteredRecipes.push(recipe);
@@ -47,7 +47,7 @@ export default class MainSearch {
             if (exist && this.isFilteredByTag(recipe)) {
                 filteredRecipes.push(recipe);
             }
-        });
+        }
 
         //si la recherche ne retourne aucun résultat, on affiche un message
         if (filteredRecipes.length === 0) {
