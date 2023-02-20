@@ -31,7 +31,9 @@ export default class MainSearch {
     }
 
     search(query) {
-        const filteredRecipes = this._recipes.filter(recipe => {
+        const filteredRecipes = []
+
+        this._recipes.forEach(recipe => {
             const exist = recipe.name.toLowerCase().includes(query.toLowerCase())
                 || recipe.description.toLowerCase().includes(query.toLowerCase())
                 || recipe.ingredients.find(
@@ -39,14 +41,12 @@ export default class MainSearch {
                 );
 
             if (exist && this._filterBytags === []) {
-                return recipe;
+                filteredRecipes.push(recipe);
             }
 
             if (exist && this.isFilteredByTag(recipe)) {
-                return recipe;
+                filteredRecipes.push(recipe);
             }
-
-            return false;
         });
 
         //si la recherche ne retourne aucun résultat, on affiche un message
@@ -63,8 +63,8 @@ export default class MainSearch {
         else {
             this._recipesSection.innerHTML = '';
             filteredRecipes.forEach(recipe => {
-                    this._recipesSection.appendChild(createRecipeDOM(recipe))
-                })
+                this._recipesSection.appendChild(createRecipeDOM(recipe))
+            })
         }
         listRender(filteredRecipes)
     }
